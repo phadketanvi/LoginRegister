@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="index.css" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluation: Web Page</title>
+</head>
+
+<body>
+    <script>
+        window.addEventListener('load', function () {
+
+            let checkBio = JSON.parse(localStorage.getItem('user'));
+
+            if (checkBio == null) {
+                window.location.href = 'login.html';
+            }
+        })
+    </script>
+
+    <div class="container">
+        <div class="top">
+            <div class="user">
+                <span>Welcome</span><span id="username"></span>
+            </div>
+            <div class="logout">
+                <button id="btn">Logout</button>
+            </div>
+            
+        </div>
+        <br/> <br/>
+        <div class="btns">
+            <button id="" style="float: right">Check out...!</button>
+            <button id="" style="float: right">Back to Product List!</button>
+        </div>
+        
+    </div>
+    <br/><br/>
+    <div class="items" id="items">
+    </div>
+
+    <script src="index.js"></script>
+</body>
+
+</html>
