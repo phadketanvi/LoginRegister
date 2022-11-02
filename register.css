@@ -1,20 +1,6 @@
 *{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-
-body{
-    text-align: center;
-}
-
-
-.container{
-    display: inline-block;
-    text-align: center;
-    min-height: 500px;
-    min-width: 500px;
-    justify-content: center;
-}
-
 .registerform{
     display: inline-flex;
     text-align: center;

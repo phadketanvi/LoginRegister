@@ -1,15 +1,9 @@
 *{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 0%;
+    margin: 0;
 }
 
-.container{
-    margin: 2%;
-}
-
-.user{
-    float: left;
-    margin-left: 5%;
-}
 
 .logout{
     float: right;
@@ -18,7 +12,6 @@
 span{
     font-size: x-large;
 }
-
 
 button{
     min-width: 100px;
@@ -98,3 +91,4 @@ button{
 .desc-btn{
     background-color: #007BFF;
 }
+

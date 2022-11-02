@@ -1,0 +1,10 @@
+.header-wrapper {
+    background: #00aad4;
+    width: 100%;
+  }
+  .boxx {
+    padding: 1px;
+    margin: 15px;
+    background-color: #fff;
+    border: 1px #000 solid;
+  }

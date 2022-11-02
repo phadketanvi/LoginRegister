@@ -12,29 +12,24 @@ btn.addEventListener('click', function() {
     window.location.href = "login.html";
 });
 
-var productlist = 
-    [
-        {
-            name: "Intel CPU",
-            price: 10000,
-            image: "https://pngimg.com/uploads/cpu/cpu_PNG23.png"
-        },
-        {
-            name: "NVIDIA RTX GPU",
-            price: 200000,
-            image: "https://img1.cgtrader.com/items/2479991/28e728ca3d/nvidia-rtx-3080-ampere-3d-model-obj-fbx-blend.jpg"
-        },
-        {
-            name: "Logitech Mouse",
-            price: 5000,
-            image: "https://www.techpowerup.com/img/14-04-08/32a.jpg"
-        },
-        {
-            name: "Gaming Headset",
-            price: 2000,
-            image: "https://cdn.sandberg.world/products/images/lg/126-16_lg.jpg"
-        }
-    ];
+// var productlist = 
+//     [
+//         {
+//             name: "Intel CPU",
+//             price: 10000,
+//             image: "https://pngimg.com/uploads/cpu/cpu_PNG23.png"
+//         },
+//         {
+//             name: "NVIDIA RTX GPU",
+//             price: 200000,
+//             image: "https://img1.cgtrader.com/items/2479991/28e728ca3d/nvidia-rtx-3080-ampere-3d-model-obj-fbx-blend.jpg"
+//         },
+//         {
+//             name: "Logitech Mouse",
+//             price: 5000,
+//             image: "https://www.techpowerup.com/img/14-04-08/32a.jpg"
+//         }
+//     ];
 
 window.addEventListener('load', ()=>{
     localStorage.setItem("productlist", JSON.stringify(productlist));

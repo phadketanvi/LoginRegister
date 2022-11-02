@@ -7,9 +7,88 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Evaluation: Web Page</title>
+    <link rel="stylesheet" href="nav.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
 </head>
 
 <body>
+    <div class="container-fluid p-0 m-0">
+        <div class="header-wrapper">
+            <div class="row">
+                <div class="col-sm-2">
+                    <a href="#">
+                        <img src="./11.svg" style="margin: 0px" class="img-responsive" height="150px" /></a>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="d-block text-center">The Collaboration Space</h1>
+                    <nav class="navbar navbar-expand-lg navbar-light">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav m-auto">
+                                <li class="nav-item boxx">
+                                    <a class="nav-link" href="./index.html">HOME</a>
+                                </li>
+                                <li class="nav-item boxx">
+                                    <a class="nav-link" href="#">MEETUPS</a>
+                                </li>
+                                <li class="nav-item boxx">
+                                    <a class="nav-link" href="#">FUN ACTIVITIES</a>
+                                </li>
+                                <li class="nav-item boxx">
+                                    <a class="nav-link" href="#">MENTAL HEALTH</a>
+                                </li>
+                                <li class="nav-item boxx">
+                                    <a class="nav-link" id="btn" href="#">LOGOUT</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12 col-md-4 p-0 m-0">
+                <center>
+                    <div>
+                        <img src="prof.PNG" height="300" width="300"><br>
+                        <span>Welcome</span><span id="username"></span>
+                    </div>
+                </center>
+            </div>
+            <div class="col-sm-12 col-md-4 p-0 m-0">
+                <center>
+                    <img src="middle2.PNG" height="300" width="400">
+                    <br>
+                    <img src="middle3.PNG" height="300" width="400">
+                </center>
+            </div>
+
+            <div class="col-sm-12 col-md-4 p-0 m-0">
+                <center>
+                    <div class="pt-5">
+
+                        <iframe width="350" height="200" src="https://www.youtube.com/embed/vradYqcXfGQ" frameborder="0"
+                            allowfullscreen></iframe>
+                        <br><br>
+                        <p>A web application for remote workers to build strong relations with their 
+                            colleagues or team members by indulging in fun activities/meet-ups, 
+                            participate in online games and get mental help. </p>
+                        </div>
+                </center>
+            </div>
+        </div>
+
+
+    </div>
+    <br /><br />
+    <div class="items" id="items">
+    </div>
     <script>
         window.addEventListener('load', function () {
 
@@ -20,29 +99,17 @@
             }
         })
     </script>
-
-    <div class="container">
-        <div class="top">
-            <div class="user">
-                <span>Welcome</span><span id="username"></span>
-            </div>
-            <div class="logout">
-                <button id="btn">Logout</button>
-            </div>
-            
-        </div>
-        <br/> <br/>
-        <div class="btns">
-            <button id="" style="float: right">Check out...!</button>
-            <button id="" style="float: right">Back to Product List!</button>
-        </div>
-        
-    </div>
-    <br/><br/>
-    <div class="items" id="items">
-    </div>
-
     <script src="index.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>
