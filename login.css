@@ -1,0 +1,32 @@
+*{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 0%;
+    margin: 0;
+}
+
+
+.loginform{
+    display: inline-flex;
+    text-align: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+input{
+    margin: 2%;
+    min-width: 400px;
+    min-height: 25px;
+    border-radius: 2px;
+}
+
+button{
+    width: 100px;
+    margin: 2%;
+    text-align: center;
+    justify-content: center;
+    border: none;
+    border-radius: 2px;
+    height: 25px;
+    background-color: #DC3545;
+    color: white;
+}
