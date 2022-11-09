@@ -62,8 +62,41 @@ function additems(data){
     ptag1.classList.add("nameofproduct");
     let maindiv = document.getElementById("items");
     btn1.innerHTML = "Join Now";
-    btn1.onclick= function(){
-        window.open('https://discord.gg/bDqAh5gn', '_blank');
+    if (data.name == "Movies")
+    {
+        btn1.onclick= function(){
+            window.location.href= "moviesChatbox.html";
+        }
+    }
+    else if (data.name == "Sports")
+    {
+        btn1.onclick= function(){
+            window.location.href= "sportsChatbox.html";
+        }
+    }
+    else if (data.name == "Fashion")
+    {
+        btn1.onclick= function(){
+            window.location.href= "fashionChatbox.html";
+        }
+    }
+    else if (data.name == "Fitness")
+    {
+        btn1.onclick= function(){
+            window.location.href= "fitnessChatbox.html";
+        }
+    }
+    else if (data.name == "News")
+    {
+        btn1.onclick= function(){
+            window.location.href= "newsChatbox.html";
+        }
+    }
+    else if (data.name == "Adventure")
+    {
+        btn1.onclick= function(){
+            window.location.href= "adventureChatbox.html";
+        }
     }
     maindiv.appendChild(item);
     item.appendChild(img);
