@@ -1,18 +1,12 @@
-window.addEventListener('load', function() {
-    let span1 = document.getElementById("username");
-    const user = JSON.parse(localStorage.getItem("user"));
-    const name = user.name;
-    span1.innerHTML = " " + name + " ...!";
-});
-
-
+// Functionality for logout button
 let btn = document.getElementById('btn');
 btn.addEventListener('click', function() {
     localStorage.removeItem("user");
     window.location.href = "login.html";
 });
 
-var productlist = 
+//List of various activities for user to choose from
+var activitylist = 
     [
         {
             name: "Tic Tac Toe",
@@ -32,63 +26,59 @@ var productlist =
         }
     ];
 
+// Function to load all the activities available
 window.addEventListener('load', ()=>{
-    localStorage.setItem("productlist", JSON.stringify(productlist));
-    let data = JSON.parse(localStorage.getItem("productlist"))
-
-    console.log(data);
-    
-    for(let i = 0; i<data.length; i++){
-        additems(data[i]);
+    localStorage.setItem("activitylist", JSON.stringify(activitylist));
+    let activity = JSON.parse(localStorage.getItem("activitylist"))
+    for(let i = 0; i<activity.length; i++){
+        addActivities(activity[i]);
     }
 });
 
-function addbtn(data, btn1){
-    
-    if (data.name == "Tic Tac Toe") {
-        btn1.onclick= function(){
+// Function to add buttons for all activities
+function addbtn(activity, activityBtn){    
+    if (activity.name == "Tic Tac Toe") {
+        activityBtn.onclick= function(){
             window.location.href = "TicTacToe.html";
         }
     } 
-    else if (data.name == "Bingo") {
-        btn1.onclick= function(){
+    else if (activity.name == "Bingo") {
+        activityBtn.onclick= function(){
             window.location.href = "bingo.html";
         }
     }  
-    else if (data.name == "Quiz") {
-        btn1.onclick= function(){
+    else if (activity.name == "Quiz") {
+        activityBtn.onclick= function(){
             window.location.href = "quiz.html";
         }
     }  
-    else if (data.name == "Sudoku") {
-        btn1.onclick= function(){
+    else if (activity.name == "Sudoku") {
+        activityBtn.onclick= function(){
             window.location.href= "sudoku.html";
         }
     }   
 }
 
-
-function additems(data){
+// Function to create various activity cards
+function addActivities(activity){
+    let activityName = document.createElement('p');
+    let activityImage = document.createElement('img'); 
+    let activityBtn = document.createElement('button');
+    let activityBtnDiv = document.createElement('div');
     let item = document.createElement('div');
-    let img = document.createElement('img');
-    let ptag1 = document.createElement('p');
-    let btnsdiv = document.createElement('div');
-    let btn1 = document.createElement('button');
-    item.classList.add("item");
-    img.classList.add("product-img");
-    ptag1.classList.add("nameofproduct");
     let maindiv = document.getElementById("items");
-    
-    addbtn(data, btn1);
-    btn1.innerHTML = "Join Now";
-    btn1.onclick= function(){
-        addbtn(data, btn1);
+    item.classList.add("item");
+   
+    addbtn(activity, activityBtn);
+    activityBtn.innerHTML = "Join Now";
+    activityBtn.onclick= function(){
+        addbtn(activity, activityBtn);
     }
     maindiv.appendChild(item);
-    item.appendChild(img);
-    item.appendChild(ptag1);
-    item.appendChild(btnsdiv);
-    btnsdiv.appendChild(btn1);
-    img.src=data.image;
-    ptag1.innerHTML = data.name;
+    item.appendChild(activityImage);
+    item.appendChild(activityName);
+    item.appendChild(activityBtnDiv);
+    activityBtnDiv.appendChild(activityBtn);
+    activityImage.src=activity.image;
+    activityName.innerHTML = activity.name;
 }

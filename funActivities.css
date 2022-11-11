@@ -1,16 +1,5 @@
 *{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    padding: 0%;
-    margin: 0;
-}
-
-
-.logout{
-    float: right;
-}
-
-span{
-    font-size: x-large;
 }
 
 button{
@@ -25,19 +14,6 @@ button{
     color: white;
     min-height: 40px;
 }
-
-
-.btns{
-    margin-top: 1%;
-}
-
-.btns button{
-    float: right;
-    background-color: #007BFF;
-    margin: 0%;
-    margin-left: 1%;
-}
-
 
 .items{
     text-align: center;
@@ -56,38 +32,4 @@ button{
     min-height: 150px;
     max-width: 250px;
     max-height: 150px;
-}
-
-.nameofproduct{
-    font-size: larger;
-}
-
-.price{
-    font-size: smaller;
-}
-
-.quan span{
-    font-size: small;
-}
-
-.quan input{
-    color: white;
-    background-color:rgb(0, 174, 116);
-    border: none;
-    border-radius: 4px;
-    margin-left: 2px;
-}
-
-.morebtns{
-    display: flex;
-    justify-content: space-between;
-    margin-top: 2%;
-}
-
-.morebtns button{
-    min-height: 40px;
-}
-
-.desc-btn{
-    background-color: #007BFF;
 }

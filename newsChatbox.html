@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--After selecting News topic the header for the news chat box webpage will open up and the links for its styling for meetups, chatbox for news and nav bar css is defined in the head.-->
+
+<head>
+    <link rel="stylesheet" type="text/css" href="newsChatbox.css" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News ChatBox</title>
+    <link rel="stylesheet" type="text/css" href="meetup.css" />
+    <link rel="stylesheet" href="nav.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+
+</head>
+
+<!--Here the body contains the header container with all the required buttons for navigations between pages and also the descriptin and fun slogans for our user-->
+
+<body>
+    <div class="container-fluid p-0 m-0">
+        <div class="header-wrapper" style="background-image: url('Images/y.jpeg'); background-blend-mode: lighten; background-color: rgba(255,255,255,0.4);">
+            <div class="row">
+                <div class="col-sm-2">
+                    <a href="#">
+                        <img src="Images/logo2.svg" style="margin: 0px" class="img-responsive" height="200px" /></a>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="d-block text-center" style="font-weight: bold;" ;>The Collaboration Space</h1>
+                    <nav class="navbar navbar-expand-lg navbar-light">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav m-auto">
+                                <li class="nav-item boxx">
+                                    <a class="nav-link" href="index.html">HOME</a>
+                                </li>
+                                <li class="nav-item boxx">
+                                    <a class="nav-link" href="meetup.html">BACK</a>
+                                </li>
+                                <li class="nav-item boxx">
+                                    <a class="nav-link" href="meetup.html">MEETUPS</a>
+                                </li>
+                                <li class="nav-item boxx">
+                                    <a class="nav-link" href="funActivities.html">FUN ACTIVITIES</a>
+                                </li>
+                                <li class="nav-item boxx">
+                                    <a class="nav-link" href="mentalhealth.html">MENTAL HEALTH</a>
+                                </li>
+                                <li class="nav-item boxx">
+                                    <a class="nav-link" id="btn" href="login.html">LOGOUT</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+
+        </div>
+        <br/><br/>
+        <div class="card" id="rect" style="font-weight: bold; margin:0 auto ;text-align: center; width: 40%; color: white; background-color: #D9A5B3;">
+            <div class="card-body">
+                <h4 style="font-weight: bold;">Take a break and join a meet up room</h4>
+            </div>
+        </div>
+        <br>
+        <div class="card" id="rect" style="font-weight: normal ; margin:0 auto ;text-align: center; width: 60%; color: white; background-color: #6883BC;">
+            <div class="card-body">
+                <h5 style="font-weight: bold;">Description: </h5>
+                All Global News at one-stop <br> Meet your colleagues and find out interesting global news
+            </div>
+        </div>
+        <br>
+        <div class="row" style="margin-left: 500px;">
+            <div class="col-md-4">
+                <img src="Images/News1.jpeg" style="margin: 0px" class="img-responsive" height="250px" width="300px" /></a>
+            </div>
+            <div class="col-md-8">
+                <p id="chatLog"><br><br></p>
+                <input placeholder="Enter you message.." id="chatBoxNews" type="text" onkeydown="if (event.keyCode == 13) {newsChatbot()}">
+            </div>
+        </div>
+</body>
+
+<!--We have created a simple chat bot kinda functionality related to our topic where we are giving some predefined questions and answers for user testing purposes 
+    to show that it gives responses and fulfil the requirement for now-->
+
+<script>
+    predefinedNews = {
+        "Hello": "Hey! How are you?",
+        "Hi": "Hey! How are you?",
+        "Hey": "Hey! How are you?",
+        "I am good. you?": "I am good too. what are the best news today?",
+        "No idea, do you know?": "no, let's watch together",
+        "I am good. What about you?": "I am good too. What are the updates on stock market?",
+        "I think it is still down. Did you see the lunar eclipse details?": "Not yet. That sounds interesting. Can you share?",
+        "Sure. I will send you the details. You should subsribed to this app for news": "Thank you for sharing and the information.",
+        "You're welcome. I will keep in touch!": "Sounds just right! Text you later with more updates."
+    };
+
+    //if user enters something which is not listed in a predefined list for news then it will give a message stating the following
+    function newsChatbot() {
+        var user = document.getElementById("chatBoxNews").value;
+        document.getElementById("chatBoxNews").value = "";
+        document.getElementById("chatLog").innerHTML += user + "<br>";
+        if (user in predefinedNews) {
+            document.getElementById("chatLog").innerHTML += predefinedNews[user] + "<br>";
+        } else {
+            document.getElementById("chatLog").innerHTML += "I am not programmed for this! Can you try some other messages!<br>";
+        }
+    }
+</script>
+
+</html>

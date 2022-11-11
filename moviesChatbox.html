@@ -1,19 +1,22 @@
-<html>
-<!--Header contains links to the javascript file for logic of the bingo game and the styling of navigation bar of the header-->
+<!DOCTYPE html>
+<html lang="en">
+
+<!--After selecting Movies topic the header for the movies chat box webpage will open up and the links for its styling for meetups, chatbox for movies and nav bar css.-->
 
 <head>
-    <title>Office Bingo</title>
+    <link rel="stylesheet" type="text/css" href="moviesChatbox.css" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies ChatBox</title>
+    <link rel="stylesheet" type="text/css" href="meetup.css" />
     <link rel="stylesheet" href="nav.css">
-    <link rel="stylesheet" type="text/css" href="bingo.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
-    <script src="bingo.js"></script>
 
 </head>
+<!--Here the body contains the header container with all the required buttons for navigations between pages and also the descriptin and fun slogans for our user-->
 
-<!--upon loading the body this function is called defined inside the javascript file and other information is related to the header 
-	and also includes the description of how user could play office bingo game -->
-
-<body onLoad="beginOfficeBingo()">
+<body>
     <div class="container-fluid p-0 m-0">
         <div class="header-wrapper" style="background-image: url('Images/y.jpeg'); background-blend-mode: lighten; background-color: rgba(255,255,255,0.4);">
             <div class="row">
@@ -33,7 +36,7 @@
                                     <a class="nav-link" href="index.html">HOME</a>
                                 </li>
                                 <li class="nav-item boxx">
-                                    <a class="nav-link" href="funActivities.html">BACK</a>
+                                    <a class="nav-link" href="meetup.html">BACK</a>
                                 </li>
                                 <li class="nav-item boxx">
                                     <a class="nav-link" href="meetup.html">MEETUPS</a>
@@ -54,24 +57,56 @@
             </div>
 
         </div>
-        <br>
+        <br/><br/>
         <div class="card" id="rect" style="font-weight: bold; margin:0 auto ;text-align: center; width: 40%; color: white; background-color: #D9A5B3;">
             <div class="card-body">
-                <h4 style="font-weight: bold;">OFFICE BINGO</h4>
+                <h4 style="font-weight: bold;">Take a break and join a meet up room</h4>
             </div>
         </div>
         <br>
         <div class="card" id="rect" style="font-weight: normal ; margin:0 auto ;text-align: center; width: 60%; color: white; background-color: #6883BC;">
             <div class="card-body">
-                <h5 style="font-weight: bold;">Game Instructions: </h5>
-                Players can select the cards that they relate to by clicking on the checkbox next to the card. Players can then interact with their colleagues and have a fun time discussing everyone's answers.
+                <h5 style="font-weight: bold;">Description: </h5>
+                React to moments together! <br> Today's Watch Party Movie-> "The Conjuring" <br> Bring your popcorn ready and Have fun.
             </div>
         </div>
         <br>
-        <div id="grid" style="margin-left:50px; margin-right: 50px; margin-bottom: 20px;"></div>
-        <form>
-            <input type="button" id="btn1" value="Generate" onClick="generateOfficeBingo();" />
-        </form>
+        <div class="row" style="margin-left: 500px;">
+            <div class="col-md-4">
+                <img src="Images/Movies1.jpeg" style="margin: 0px" class="img-responsive" height="300px" /></a>
+            </div>
+            <div class="col-md-8">
+                <p id="chatLog"><br><br></p>
+                <input placeholder="Enter you message.." id="chatBoxMovies" type="text" onkeydown="if (event.keyCode == 13) {moviesChatbot()}">
+            </div>
+        </div>
 </body>
+
+<!--We have created a simple chat bot kinda functionality related to our topic where we are giving some predefined questions and answers for user testing purposes 
+    to show that it gives responses and fulfil the requirement for now-->
+<script>
+    predefinedMovies = {
+        "Hello": "Hey! How are you?",
+        "Hi": "Hey! How are you?",
+        "Hey": "Hey! How are you?",
+        "I am good. you?": "I am good too. Do you enjoy movies?",
+        "Yes, do you like movies?": "Yes me too",
+        "I am good. What about you?": "I am good too. Do you enjoy movies?",
+        "Very much. What kind of movies do you like?": "Ummm I would prefer horror any day!",
+        "Nice. I enjoy thriller movies the most.": "It was great talking to you :)"
+    };
+
+    //if user enters something which is not listed in a predefined list for mpovies then it will give a message stating the following
+    function moviesChatbot() {
+        var user = document.getElementById("chatBoxMovies").value;
+        document.getElementById("chatBoxMovies").value = "";
+        document.getElementById("chatLog").innerHTML += user + "<br>";
+        if (user in predefinedMovies) {
+            document.getElementById("chatLog").innerHTML += predefinedMovies[user] + "<br>";
+        } else {
+            document.getElementById("chatLog").innerHTML += "I am not programmed for this! Can you try some other messages!<br>";
+        }
+    }
+</script>
 
 </html>

@@ -1,14 +1,4 @@
-
-	/* CSS Code */
-	/* Heading */
-	/* h2 {
-		color: orangered;
-		font-size: 45px;
-	} */
-
-	/* 3*3 Grid */
-	#b1, #b2, #b3, #b4, #b5,
-	#b6, #b7, #b8, #b9 {
+	#but1, #but2, #but3, #but4, #but5, #but6, #but7, #but8, #but9 {
 		width: 80px;
 		height: 52px;
 		margin: auto;
@@ -29,24 +19,15 @@
 		font-family: Verdana,
 			Geneva, Tahoma, sans-serif;
 
-		background-color: dodgerblue;
+		background-color: #DC3545;
 		color: white;
 		font-size: 20px;
 		cursor: pointer;
 	}
 
-	/* Player turn space */
-	#print {
-		font-family: Verdana,
-			Geneva, Tahoma, sans-serif;
-
-		color: dodgerblue;
-		font-size: 20px;
-	}
-
-	/* Main Container */
-	#main {
-		text-align: center;
+	/* Player turn print */
+	#playerTurnPrint {
+		color: red;
 	}
 
 	/* Game Instruction Text */

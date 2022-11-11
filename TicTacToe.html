@@ -3,19 +3,17 @@
 <head>
 	<meta name="viewport" content=
 		"width=device-width, initial-scale=1.0">
-
-	<!-- CSS file Included -->
 	<link rel="stylesheet"
 		type="text/css" href="TicTacToe.css">
-
-	<!-- JavaScript file included -->
-	<script src="TicTacToe.js"></script>
+	
+    <title>Tic Tac Toe</title>
     <link rel="stylesheet" href="nav.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
 
 </head>
 
 <body>
+    <!-- Header for Tic Tac Toe page -->
     <div class="container-fluid p-0 m-0">
         <div class="header-wrapper" style="background-image: url('Images/y.jpeg'); background-blend-mode: lighten; background-color: rgba(255,255,255,0.4);">
             <div class="row">
@@ -44,10 +42,10 @@
                                     <a class="nav-link" href="funActivities.html">FUN ACTIVITIES</a>
                                 </li>
                                 <li class="nav-item boxx">
-                                    <a class="nav-link" href="#">MENTAL HEALTH</a>
+                                    <a class="nav-link" href="mentalhealth.html">MENTAL HEALTH</a>
                                 </li>
                                 <li class="nav-item boxx">
-                                    <a class="nav-link" id="btn" href="#">LOGOUT</a>
+                                    <a class="nav-link" id="btn" href="login.html">LOGOUT</a>
                                 </li>
                             </ul>
                         </div>
@@ -58,14 +56,15 @@
         </div>
         <br/><br/>
 
-	<div id="main">
-		
+	<div id="main" style="text-align: center;">
+		<!-- Section for the title Tic Tac Toe -->
 		<div class="card" id="rect" style="font-weight: bold; margin:0 auto ;text-align: center; width: 40%; color: white; background-color: #D9A5B3;">
             <div class="card-body">
-                TIC TAC TOE
+                <h4 style="font-weight: bold;">TIC TAC TOE</h4>
             </div>
         </div>
 		<br>
+        <!-- Section displaying instructions of Tic Tac Toe -->
 		<div class="card" id="rect" style="font-weight: normal ; margin:0 auto ;text-align: center; width: 60%; color: white; background-color: #6883BC;">
             <div class="card-body">
                 <h5 style="font-weight: bold;">Game Instructions: </h5> 
@@ -74,51 +73,57 @@
         </div>
 		
 		<br>
-		<!-- 3*3 grid of Boxes -->
-		<input type="text" id="b1" onclick=
-			"myfunc_3(); myfunc();" readonly>
+		<!-- Creating the grid for Tic Tac Toe game -->
+		<input type="text" id="but1" onclick=
+			"winnerFuntion1(); createGrid();" readonly>
 
-		<input type="text" id="b2" onclick=
-			"myfunc_4(); myfunc();" readonly>
+		<input type="text" id="but2" onclick=
+			"winnerFuntion2(); createGrid();" readonly>
 
-		<input type="text" id="b3" onclick=
-			"myfunc_5(); myfunc();" readonly>
+		<input type="text" id="but3" onclick=
+			"winnerFuntion3(); createGrid();" readonly>
 		<br><br>
 
-		<input type="text" id="b4" onclick=
-			"myfunc_6(); myfunc();" readonly>
+		<input type="text" id="but4" onclick=
+			"winnerFuntion4(); createGrid();" readonly>
 			
-		<input type="text" id="b5" onclick=
-			"myfunc_7(); myfunc();" readonly>
+		<input type="text" id="but5" onclick=
+			"winnerFuntion5(); createGrid();" readonly>
 
-		<input type="text" id="b6" onclick=
-			"myfunc_8(); myfunc();" readonly>
+		<input type="text" id="but6" onclick=
+			"winnerFuntion6(); createGrid();" readonly>
 		<br><br>
 
-		<input type="text" id="b7" onclick=
-			"myfunc_9(); myfunc();" readonly>
+		<input type="text" id="but7" onclick=
+			"winnerFuntion7(); createGrid();" readonly>
 
-		<input type="text" id="b8" onclick=
-			"myfunc_10();myfunc();" readonly>
+		<input type="text" id="but8" onclick=
+			"winnerFuntion8();createGrid();" readonly>
 
-		<input type="text" id="b9" onclick=
-			"myfunc_11();myfunc();" readonly>
+		<input type="text" id="but9" onclick=
+			"winnerFuntion9();createGrid();" readonly>
 
-		<!-- Grid end here -->
 		<br><br><br>
-		<!-- Button to reset game -->
-		<button id="but" onclick="myfunc_2()">
+		<!-- Reset button functionality -->
+		<button id="but" onclick="resetFunction()">
 			RESET
 		</button>
 
 		<br><br>
-		<!-- Space to show player turn -->
-		<p id="print"></p>
-
-
-
-
+		Which player's turn is it?
+		<p id="playerTurnPrint"></p>
 	</div>
+        <!-- This will check the condition that user is logged in or not -->
+        <script>
+            window.addEventListener('load', function() {
+    
+                let checkBio = JSON.parse(localStorage.getItem('user'));
+    
+                if (checkBio == null) {
+                    window.location.href = 'login.html';
+                }
+            })
+        </script>
+    <script src="TicTacToe.js"></script>
 </body>
-
 </html>

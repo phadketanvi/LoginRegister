@@ -1,6 +1,6 @@
 (function( $ ){
 
-    var methods = {
+    var listOfMethods = {
        init : function( options ) {
   
           return this.each(function() {  
@@ -10,17 +10,16 @@
                       {level: "Medium", numbers: 30},
                       {level: "Hard", numbers: 20}
                   ]
-              };
-  
-              var defaults = {
-                  matrix : [],
-                  domMatrix : [],
-                  numOfRows : 9,
-                  numOfCols : 9,
+              };  
+              var defaultValues = {
+                  sudokuGrid : [],
+                  dominantMatrix : [],
+                  countRows : 9,
+                  countCols : 9,
                   level : 40,
                   selected : null,
-                  selectedSolution : null,
-                  anwerTracker : {
+                  solutionSelected : null,
+                  correctAnswer : {
                       "1" : 9,
                       "2" : 9,
                       "3" : 9,
@@ -37,214 +36,175 @@
                 }
   
               var $this = $(this);
-              $this.addClass('sdk-game');
+              $this.addClass('sudokuGrid');
               
-              //creates the sudoku number grid
-              $this.createMatrix = function() {
-                  var matrix = new Array();
-                  for(var rowCounter=0;rowCounter<9;rowCounter++){
-                      matrix[rowCounter] = new Array();
-                      for(var colCounter=0;colCounter<9;colCounter++){
-                          var number = colCounter/1 + 1 + (rowCounter*3) + Math.floor(rowCounter/3)%3;
+              // Function to create the grid
+              $this.loadMatrix = function() {
+                  var sudokuGrid = new Array();
+                  for(var row=0;row<9;row++){
+                      sudokuGrid[row] = new Array();
+                      for(var col=0;col<9;col++){
+                          var number = col/1 + 1 + (row*3) + Math.floor(row/3)%3;
                           if(number>9) number = number % 9;
                           if(number==0) number=9;
-                          matrix[rowCounter][colCounter] = number;				
+                          sudokuGrid[row][col] = number;				
                       }			
                   }
-                  // Switching rows
-                  for(var no=0;no<9;no+=3){
+                  // Function to reset rows
+                  for(var reset=0;reset<9;reset+=3){
                       for(var no2=0;no2<3;no2++){
-                          row1 = Math.floor(Math.random()*3);	
-                          row2 = Math.floor(Math.random()*3);	
-                          while(row2==row1){
-                              row2 = Math.floor(Math.random()*3);	
+                          firstRow = Math.floor(Math.random()*3);	
+                          secondRow = Math.floor(Math.random()*3);	
+                          while(secondRow==firstRow){
+                              secondRow = Math.floor(Math.random()*3);	
                           }
-                          row1 = row1 + no;
-                          row2 = row2 + no;			
-                          var tmpMatrix = new Array();
-                          tmpMatrix = matrix[row1];
-                          matrix[row1] = matrix[row2];
-                          matrix[row2] = tmpMatrix; 				
+                          firstRow = firstRow + reset;
+                          secondRow = secondRow + reset;			
+                          var temp = new Array();
+                          temp = sudokuGrid[firstRow];
+                          sudokuGrid[firstRow] = sudokuGrid[secondRow];
+                          sudokuGrid[secondRow] = temp; 				
                       }			
                   }
-                  // Switching columns
-                  for(var no=0;no<9;no+=3){
+                  // Function to reset columns
+                  for(var reset=0;reset<9;reset+=3){
                       for(var no2=0;no2<3;no2++){
-                          col1 = Math.floor(Math.random()*3);	
-                          col2 = Math.floor(Math.random()*3);	
-                          while(col2==col1){
-                              col2 = Math.floor(Math.random()*3);	
+                          firstCol = Math.floor(Math.random()*3);	
+                          secondCol = Math.floor(Math.random()*3);	
+                          while(secondCol==firstCol){
+                              secondCol = Math.floor(Math.random()*3);	
                           }
-                          col1 = col1 + no;
-                          col2 = col2 + no;			
-                          var tmpMatrix = new Array();
-                          for(var no3=0;no3<matrix.length;no3++){
-                              tmpMatrixValue = matrix[no3][col1];
-                              matrix[no3][col1] = matrix[no3][col2];				
-                              matrix[no3][col2] = tmpMatrixValue;				
+                          firstCol = firstCol + reset;
+                          secondCol = secondCol + reset;			
+                          var temp = new Array();
+                          for(var no3=0;no3<sudokuGrid.length;no3++){
+                              temp = sudokuGrid[no3][firstCol];
+                              sudokuGrid[no3][firstCol] = sudokuGrid[no3][secondCol];				
+                              sudokuGrid[no3][secondCol] = temp;				
                           }
                       }	
                   }
-                  return matrix;
+                  return sudokuGrid;
               };
               
-              // create the playable table
-              $this.createTable = function() {
-                  //array to hold the dom reference to the table matrix so that we dont have to travers dom all the time
-                  defaults.domMatrix = [];
-                  //create table 
-                  defaults.table = $("<div class='sdk-table sdk-no-show'></div>");
-                  //add rows and columns to table
-                  for (var row=0;row<defaults.numOfRows;row++) {
-                      defaults.domMatrix[row] = [];
-                      var tempRow = $("<div class='sdk-row'></div>");
-                      //set solid border after 3rd and 6th row
+              // Function to create the sudoku table
+              $this.loadTable = function() {
+                  defaultValues.dominantMatrix = [];
+                  defaultValues.table = $("<div class='sudokuGridEmpty sudokuBlank'></div>");
+                  for (var row=0;row<defaultValues.countRows;row++) {
+                      defaultValues.dominantMatrix[row] = [];
+                      var tempRow = $("<div class='sudokuRow'></div>");
                       if (row == 2 || row == 5) tempRow.addClass("sdk-border"); 
-                      for (var col=0;col<defaults.numOfCols;col++) {
-                          defaults.domMatrix[row][col] = $("<div class='sdk-col' data-row='"+row+"' data-col='"+col+"'></div>");
-                          //set solid border after 3rd and 6th column
-                          if (col == 2 || col == 5) defaults.domMatrix[row][col].addClass("sdk-border");
-                          //add columns to rows
-                          tempRow.append(defaults.domMatrix[row][col]);
+                      for (var col=0;col<defaultValues.countCols;col++) {
+                          defaultValues.dominantMatrix[row][col] = $("<div class='sudokuCol' data-row='"+row+"' data-col='"+col+"'></div>");
+                          if (col == 2 || col == 5) defaultValues.dominantMatrix[row][col].addClass("sdk-border");
+                          tempRow.append(defaultValues.dominantMatrix[row][col]);
                       }
-                      //add rows to table
-                      defaults.table.append(tempRow);
+                      defaultValues.table.append(tempRow);
                   }
-                  //add extra div in here for background decoration
-                  defaults.table.append("<div class='sdk-table-bk'></div>");
-                  //add table to screen
-                  $this.append(defaults.table);
-                  
-                  //populate table with random number depending on the level difficulty 
-                  var items = defaults.level;
+                  defaultValues.table.append("<div class='sudokuGridEmpty-bk'></div>");
+                  $this.append(defaultValues.table);
+                  var items = defaultValues.level;
                   while (items > 0) {
                       var row = Math.floor(Math.random() * (8 - 0 + 1)) + 0;
                       var col = Math.floor(Math.random() * (8 - 0 + 1)) + 0;
-                      if (defaults.domMatrix[row][col].children().length == 0) {
-                          defaults.domMatrix[row][col].append("<div class='sdk-solution'>"+ defaults.matrix[row][col] +"</div>");
-                          defaults.anwerTracker[defaults.matrix[row][col].toString()]--;
+                      if (defaultValues.dominantMatrix[row][col].children().length == 0) {
+                          defaultValues.dominantMatrix[row][col].append("<div class='sudokuCorrectAnswer'>"+ defaultValues.sudokuGrid[row][col] +"</div>");
+                          defaultValues.correctAnswer[defaultValues.sudokuGrid[row][col].toString()]--;
                           items--;
                       }
                   }
-                  //click even when clicking on cells
-                  defaults.table.find(".sdk-col").click(function () {
-                      //remove any helper styling
-                      $this.find(".sdk-solution").removeClass("sdk-helper");
-                      $this.find(".sdk-col").removeClass("sdk-selected");
+                  defaultValues.table.find(".sudokuCol").click(function () {
+                      $this.find(".sudokuCorrectAnswer").removeClass("sdk-helper");
+                      $this.find(".sudokuCol").removeClass("sdk-selected");
                       if ($(this).children().length == 0) {
-                          //select this 
-                          defaults.domMatrix[$(this).attr("data-row")][$(this).attr("data-col")].addClass("sdk-selected");
-                          defaults.selected = defaults.domMatrix[$(this).attr("data-row")][$(this).attr("data-col")];
-                          defaults.selectedSolution = defaults.matrix[$(this).attr("data-row")][$(this).attr("data-col")]
+                          defaultValues.dominantMatrix[$(this).attr("data-row")][$(this).attr("data-col")].addClass("sdk-selected");
+                          defaultValues.selected = defaultValues.dominantMatrix[$(this).attr("data-row")][$(this).attr("data-col")];
+                          defaultValues.solutionSelected = defaultValues.sudokuGrid[$(this).attr("data-row")][$(this).attr("data-col")]
                       } else {
-                          //add helper style
-                          $this.highlightHelp(parseInt($(this).text()));
+                          $this.helpHighlighter(parseInt($(this).text()));
                       }
                   });
                   
-                  //add answers choices to screen
-                  $this.answerPicker();
+                  $this.selectAnswer();
                                   
-                  //remove the no show class to do a small fadein animation with css
                   setTimeout(function () {
-                      defaults.table.removeClass("sdk-no-show");
+                      defaultValues.table.removeClass("sudokuBlank");
                   }, 300);
               };
               
-              //add answer picker to screen
-              $this.answerPicker = function() {
-                  //make a answer container 
-                  var answerContainer = $("<div class='sdk-ans-container'></div>");
-                  //add answer buttons to container
-                  for (var a in defaults.anwerTracker) {
-                      //check if need to show button else we add it for space reason but dont pick up clicks from it
-                      if (defaults.anwerTracker[a] > 0) {
-                          answerContainer.append("<div class='sdk-btn'>"+a+"</div>");
+              // Function to display all available answers
+              $this.selectAnswer = function() {
+                  // Function to create a container to store the answers
+                  var optionsContainer = $("<div class='sudokuAnswerContainer'></div>");
+                  for (var a in defaultValues.correctAnswer) {
+                      if (defaultValues.correctAnswer[a] > 0) {
+                          optionsContainer.append("<div class='sudokuButton'>"+a+"</div>");
                       } else {
-                          answerContainer.append("<div class='sdk-btn sdk-no-show'>"+a+"</div>");
+                          optionsContainer.append("<div class='sudokuButton sudokuBlank'>"+a+"</div>");
                       }
                   }
-                  answerContainer.find(".sdk-btn").click(function () {
-                      //only listen to clicks if it is shown
-                      if (!$(this).hasClass("sdk-no-show") && defaults.selected != null && defaults.selected.children().length == 0 ) {
-                          //check if it is the answer
-                          if ( defaults.selectedSolution == parseInt($(this).text()) ) {
-                              //decrease answer tracker
-                              defaults.anwerTracker[$(this).text()]--;
-                              //if answer tracker is 0 hide that button
-                              if (defaults.anwerTracker[$(this).text()] == 0) {
-                                  $(this).addClass("sdk-no-show");
+                  optionsContainer.find(".sudokuButton").click(function () {
+                      if (!$(this).hasClass("sudokuBlank") && defaultValues.selected != null && defaultValues.selected.children().length == 0 ) {
+                          if ( defaultValues.solutionSelected == parseInt($(this).text()) ) {
+                              defaultValues.correctAnswer[$(this).text()]--;
+                              if (defaultValues.correctAnswer[$(this).text()] == 0) {
+                                  $(this).addClass("sudokuBlank");
                               }
-                              //remove highlighter
-                              $this.find(".sdk-col").removeClass("sdk-selected");
-                              //add the answer to screen
-                              defaults.selected.append("<div class='sdk-solution'>"+ defaults.selectedSolution +"</div>");
+                              $this.find(".sudokuCol").removeClass("sdk-selected");
+                              defaultValues.selected.append("<div class='sudokuCorrectAnswer'>"+ defaultValues.solutionSelected +"</div>");
                           }
                           
                       }
                   });
-                  $this.append(answerContainer);
+                  $this.append(optionsContainer);
                   
               };
               
-              //add highlight help
-              $this.highlightHelp = function(number) {
-                  //loop through dom matrix to find filled in number that match the number we clicked on
-                  for (var row=0;row<defaults.numOfRows;row++) {
-                      for (var col=0;col<defaults.numOfCols;col++) {
-                          if ( parseInt(defaults.domMatrix[row][col].text()) == number ) {
-                              defaults.domMatrix[row][col].find(".sdk-solution").addClass("sdk-helper");
+              $this.helpHighlighter = function(number) {
+                  for (var row=0;row<defaultValues.countRows;row++) {
+                      for (var col=0;col<defaultValues.countCols;col++) {
+                          if ( parseInt(defaultValues.dominantMatrix[row][col].text()) == number ) {
+                              defaultValues.dominantMatrix[row][col].find(".sudokuCorrectAnswer").addClass("sdk-helper");
                           }
                       }
                   }
               };
               
-              // create difficulty picker 
-              $this.createDiffPicker = function() {
-                  //level picker container
-                  var picker = $("<div class='sdk-picker sdk-no-show'></div>");
-                  //loop through all levels possible and add buttons to the picker container
+              // Function that allows user to select the difficulty
+              $this.difficultySelector = function() {
+                  var picker = $("<div class='sudokuAnswerPicker sudokuBlank'></div>");
                   $(settings.levels).each(function (e) {
-                      picker.append("<div class='sdk-btn' data-level='"+this.numbers+"'>"+this.level+"</div>");
+                      picker.append("<div class='sudokuButton' data-level='"+this.numbers+"'>"+this.level+"</div>");
                   });
-                  //add it to screen
                   $this.append(picker);
-                  //click event for the level select buttons
-                  picker.find(".sdk-btn").click(function () {
-                      picker.addClass("sdk-no-show");
-                      defaults.level = parseInt($(this).attr("data-level"));
-                      //wait for animation to complete to continue on
+                  picker.find(".sudokuButton").click(function () {
+                      picker.addClass("sudokuBlank");
+                      defaultValues.level = parseInt($(this).attr("data-level"));
                       setTimeout(function () {
-                          // remove the picker from the DOM
                           picker.remove();
-                          // add the playable table to screen. 
-                          $this.createTable();
+                          $this.loadTable();
                       }, 2000);
                   });
-                  //remove the no show class to do a small fadein animation with css
                   setTimeout(function () {
-                      picker.removeClass("sdk-no-show");
+                      picker.removeClass("sudokuBlank");
                   }, 500);
               };
               
-              defaults.matrix = $this.createMatrix();
-              $this.createDiffPicker();
-              
-                    
+              defaultValues.sudokuGrid = $this.loadMatrix();
+              $this.difficultySelector();                    
            });
        }
     };   	 	
   
     $.fn.sudoku = function( method ) {
       
-      if ( methods[method] ) {
-        return methods[method].apply( this, Array.prototype.slice.call( arguments, 1 ));
+      if ( listOfMethods[method] ) {
+        return listOfMethods[method].apply( this, Array.prototype.slice.call( arguments, 1 ));
       } else if ( typeof method === 'object' || ! method ) {
-        return methods.init.apply( this, arguments );
+        return listOfMethods.init.apply( this, arguments );
       } else {
         $.error( 'Method ' +  method + ' does not exist on jQuery.sudoku' );
-      }    
-    
+      }        
     };
-  
   })( jQuery );
