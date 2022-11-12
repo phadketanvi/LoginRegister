@@ -4,51 +4,41 @@
     margin: 0;
 }
 
-
-.logout{
-    float: right;
-}
-
-span{
-    font-size: x-large;
-}
-
-button{
-    min-width: 100px;
-    margin: 2%;
-    text-align: center;
-    justify-content: center;
-    border: none;
-    border-radius: 2px;
-    height: 25px;
-    background-color: #DC3545;
-    color: white;
-    min-height: 40px;
-}
-
-
-.btns{
-    margin-top: 1%;
-}
-
 .btns button{
     float: right;
     background-color: #007BFF;
     margin: 0%;
     margin-left: 1%;
 }
+span{
+    font-size: x-large;
+}
 
+button{
+    min-width: 100px;
+    justify-content: center;
+    border: none;
+    height: 25px;
+    background-color: #DC3545;
+    min-height: 40px;
+    margin: 2%;
+    border-radius: 2px;
+    text-align: center;
+    color: white;
+
+}
 
 .items{
     text-align: center;
 }
 
 .item{
-    display: inline-block;
-    width: 250px;
-    border: 1px solid gray;
     padding: 1%;
+    display: inline-block;
+    border: 1px solid gray;
     margin: 2%;
+    width: 250px;
+
 }
 
 .item img{
@@ -57,27 +47,6 @@ button{
     max-width: 250px;
     max-height: 150px;
 }
-
-.nameofproduct{
-    font-size: larger;
-}
-
-.price{
-    font-size: smaller;
-}
-
-.quan span{
-    font-size: small;
-}
-
-.quan input{
-    color: white;
-    background-color:rgb(0, 174, 116);
-    border: none;
-    border-radius: 4px;
-    margin-left: 2px;
-}
-
 .morebtns{
     display: flex;
     justify-content: space-between;
@@ -91,4 +60,18 @@ button{
 .desc-btn{
     background-color: #007BFF;
 }
+.nameofproduct{
+    font-size: larger;
+}
+.logout{
+    float: right;
+}
+.btns{
+    margin-top: 1%;
+}
+
+
+
+
+
 

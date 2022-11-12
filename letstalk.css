@@ -1,0 +1,95 @@
+
+
+.card:hover{
+    height:390px;
+}
+.form h3{
+    color:rgb(0, 0, 0);
+    font-size:19px;
+    font-weight:900;
+    margin-bottom:10px;
+}
+.text-area span{
+    position:absolute;
+    transition:all 0.5s;
+    color:#123153;
+    font-size:14px;
+    left:9px;
+    top:1px;
+ 
+}
+.form p{
+    font-size:12px;
+    color:#000;
+    font-weight:700;
+    margin-bottom:9px;
+}
+.queryn input:focus~span,.queryn input:valid~span{
+    top:-10px;
+    font-size:12px;
+      font-weight:600;
+      color:red;
+}
+input[type='text']{
+    width:100%;
+    margin-top:10px;
+    font-size:12px;
+    transition:all 0.5s;
+    border:none;
+    border-radius:5px;
+    padding:0 9px;
+    height:40px;
+    box-sizing:border-box;
+    outline:0;
+    margin-bottom:15px;
+
+}
+.wide{
+    width:78% !important;
+}
+.card{
+    background-color:#CAB3C1 !important; 
+    border-radius:10px;
+    height:45px;
+    position:relative;
+    transition:all 0.5s;
+    width:270px;
+    font-family: 'Poppins', sans-serif;
+    overflow:hidden;
+    cursor:pointer;
+    padding:10px;
+}
+.queryn{
+    position:relative;
+}
+.queryn span{
+    position:absolute;
+    left:9px;
+    font-size:13px;
+    top:20px;
+    
+    transition:all 0.5s;
+     color:#123153;
+  
+}
+.text-area textarea{
+    width:100%;
+    resize:none;
+    padding:0 9px;
+    border-radius:3px;
+    height:70px;
+    box-sizing:border-box;
+    border:none;
+    transition:all 0.5s;
+    font-size:12px;
+    outline:0; 
+}
+
+.text-area{
+    position:relative;
+    margin-top:7px;
+    
+}
+
+
+    
