@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="sportsChatbox.css" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sports ChatBox</title>
+    <link rel="stylesheet" type="text/css" href="meetup.css" />
+    <link rel="stylesheet" href="nav.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    
+</head>
+<body>
+    <div class="container-fluid p-0 m-0">
+        <div class="header-wrapper" style="background-image: url('Images/y.jpeg'); background-blend-mode: lighten; background-color: rgba(255,255,255,0.4);">
+            <div class="row">
+                <div class="col-sm-2">
+                    <a href="#">
+                        <img src="Images/logo2.svg" style="margin: 0px" class="img-responsive" height="200px" /></a>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="d-block text-center" style="font-weight: bold;";>The Collaboration Space</h1>
+                    <nav class="navbar navbar-expand-lg navbar-light">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav m-auto">
+                                <li class="nav-item boxx">
+                                    <a class="nav-link" href="index.html">HOME</a>
+                                </li>
+                                <li class="nav-item boxx">
+                                    <a class="nav-link" href="meetup.html">BACK</a>
+                                </li>
+                                <li class="nav-item boxx">
+                                    <a class="nav-link" href="meetup.html">MEETUPS</a>
+                                </li>
+                                <li class="nav-item boxx">
+                                    <a class="nav-link" href="funActivities.html">FUN ACTIVITIES</a>
+                                </li>
+                                <li class="nav-item boxx">
+                                    <a class="nav-link" href="#">MENTAL HEALTH</a>
+                                </li>
+                                <li class="nav-item boxx">
+                                    <a class="nav-link" id="btn" href="#">LOGOUT</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+
+        </div>
+        <br/><br/>
+        <div class="card" id="rect" style="font-weight: bold; margin:0 auto ;text-align: center; width: 40%; color: white; background-color: #D9A5B3;">
+            <div class="card-body">
+                <h4 style="font-weight: bold;">Take a break and join a meet up room</h4>
+            </div>
+        </div>
+        <br>
+        <div class="card" id="rect" style="font-weight: normal ; margin:0 auto ;text-align: center; width: 60%; color: white; background-color: #6883BC;">
+            <div class="card-body">
+                <h5 style="font-weight: bold;">Description: </h5> 
+                Your platform to meet Sports Enthusiasts <br>
+                Find your sports buddy here! <br>
+                Stay updated and energetic
+            </div>
+        </div>
+        <br>
+        <div class="row" style="margin-left: 500px;">
+            <div class="col-md-4">
+                <img src="Images/Sports1.jpeg" style="margin: 0px" class="img-responsive" height="250px" width="300px" /></a>
+            </div>
+            <div class="col-md-8">
+                <p id="chatLog"><br><br></p>
+                    <input placeholder= "Enter you message.." id="userBox" type="text" onkeydown="if (event.keyCode == 13) {talk()}">
+            </div>
+        </div>
+</body>
+<script>
+    know = {
+    "Hello" : "Hey! How are you?",
+    "I am good. What about you?" : "I am good too. Are you a sports enthusiast? ",
+    "Yes, big time. How about you?" : "Oh totally. I love football.",
+    "We should watch the match today. Are you free?" : "Sure why not. I would love to.",
+    "Great. Nice to meet you!" : "Likewise. Have a good one :)"
+};
+function talk() {
+    var user = document.getElementById("userBox").value;
+    document.getElementById("userBox").value = "";
+    document.getElementById("chatLog").innerHTML += user+"<br>";
+    if (user in know) {
+        document.getElementById("chatLog").innerHTML += know[user]+"<br>";
+    } else {
+        document.getElementById("chatLog").innerHTML += "I don't understand...<br>";
+    }
+} 
+</script>
+</html>

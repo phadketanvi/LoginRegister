@@ -1,0 +1,53 @@
+
+.classfaq1{
+display: flex;
+justify-content: center;
+flex-direction: column;
+}
+
+.classfaq4:after {
+  margin-left: 5px;
+  font-size: 13px;
+  content: '\02795';
+  color: #777;
+  float: right;
+
+}
+.active:after {
+  content: "\2796";
+}
+.class3{
+  margin: auto;
+ width: 50%; 
+ padding: auto;
+ 
+}
+.active,
+.classfaq4:hover {
+  background-color: #F9F9F9;
+}
+
+.class3 {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: white;
+
+}
+.classfaq2{
+  width: 60%;
+  margin: auto;
+  
+  }
+  
+  .classfaq4 {
+    outline: none;
+    transition: 0.4s;
+    margin: auto;
+    padding: 30px 20px;
+    color: rgb(71, 64, 64);
+    cursor: pointer;
+    border: none;
+    width: 60%;
+  
+  }
