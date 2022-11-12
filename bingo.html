@@ -1,0 +1,249 @@
+<!--
+Author: Werner Stoop, 2012
+This is free and unencumbered software released into the public domain.
+http://unlicense.org/
+-->
+<html>
+<head>
+	<title>Office Bingo</title>
+	
+	<style>
+	h2 {background:rgb(230,255,230);text-align:center;padding:10px;border:1px solid green;}
+	body {font-family:Verdana;margin-left:20px;margin-right:20px}
+	td {
+		padding:10px 20px;
+		border-top:1px solid lightgray;
+		border-left:1px solid lightgray;
+		border-bottom:1px solid darkgray;
+		border-right:1px solid darkgray;
+	}
+	.error {
+		background-color:#FF7F7F;
+		color:red;
+		padding:5px;
+		margin:20px 50px;
+		border:1px solid red;
+	}
+	.highlight {
+		background:#47FF84;
+	}
+	a { 
+		color:green;
+	}
+	td label { 
+		cursor:pointer;
+	}
+	form { 
+		margin:5px;
+		padding:5px;
+		color:green;
+	}
+	#instructions {
+		display:none;
+		border: 1px solid green;
+		margin:10px;
+		padding:20px;
+	}
+	</style>
+	<link rel="stylesheet" href="nav.css">
+    <link rel="stylesheet"
+		type="text/css" href="bingo.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+
+	<script type="text/javascript">
+	
+	words = [
+		"Google your office building's address.",
+		"Slack a coworker who is 5 feet away.",
+		"Wore PJ bottoms while attending a conference.",
+		"Celebrated a teammate's birthday virtually.", 
+		"Slept in and started work late.", 
+		"Shared a virtual lunch with a colleague.", 
+		"Worked from the sofa.",
+        "Forgot the attachment while sending an email.",
+        "Had a meeting interrupted by a pet or a family member.",
+        "Showed up late to a virtual meeting.",
+        "Took a break to play an online game.",
+        "Did chair yoga.",
+        "Created a work day playlist.",
+        "Said 'My internet is down' during a video call.",
+        "Did eye strain relief excercises.",
+        "Have more food than tools on the desk.",
+        "Said or heard 'Can you hear me now'.",
+        "Worked from another place other than home.",
+        "Had power/ internet cutout during a zoom call.",
+        "Didn't shower before starting a work day.",
+        "The boss tells an unfunny joke.",
+        "The boss laughs at his/ her own joke.",
+        "Your office buddy asks for a quick 'meeting' to gossip.",
+        "Someone hangs up on a client by mistake.",            
+        "Has worked here for 3+ years.",    	
+        "Prefers tea over coffee.",    	
+        "Born in the same month as team manager.", 
+        "Sent a GIF to a coworker.",    	
+        "Attended a campus or company wide meeting.",    	
+        "Felt overwhelmed and watched a mental health video to cope with the work stress."
+		];
+		
+	var cells = {};
+		
+	function generate() {
+		var usedWords = [];
+		
+		var node = document.getElementById("grid");
+		
+		if(node.innerHTML && !confirm("Are you sure you want to regenerate?"))
+			return;
+		
+		var html = '<table border="0">';
+		for(var y = 0; y < 5; y++) {
+			html += "<tr>"
+			for(var x = 0; x < 5; x++) {
+				do {
+					var i = Math.round(Math.random() * (words.length - 1));
+					var word = words[i];
+				} while(usedWords.indexOf(word) >= 0);
+				usedWords.push(word);
+				html += '<td id="cell_' + x + '_' + y + '"><label><input id="chk-cell_' + x + '_' + y + '" type="checkbox" onclick="cellClicked(\'cell_' + x + '_' + y + "')\">" + word + "</label></td>";				
+			}
+			html += "</tr>"
+		}
+		html += "</table>";
+		node.innerHTML = html;
+		save("BuzzwordBingo.grid", html);
+		saveGameState();
+	}
+	
+	/* http://diveintohtml5.info/storage.html */
+	function supports_html5_storage() {
+	  try {
+	    return 'localStorage' in window && window['localStorage'] !== null;
+	  } catch (e) {
+	    return false;
+	  }
+	}	
+	
+	function cellClicked(id) {
+		var c = document.getElementById("chk-" + id);
+		var d = document.getElementById(id);
+		d.className =(c.checked)?"highlight":"";		
+		saveGameState();
+	}
+	
+	function saveGameState() {
+		for(var y = 0; y < 5; y++) {
+			for(var x = 0; x < 5; x++) {
+				var id = 'cell_' + x + '_' + y;
+				var c = document.getElementById("chk-" + id);
+				save("BuzzwordBingo." + id, c.checked);
+			}
+		}
+	}
+	
+	function loadGameState() {
+		for(var y = 0; y < 5; y++) {
+			for(var x = 0; x < 5; x++) {
+				var id = 'cell_' + x + '_' + y;
+				var c = document.getElementById("chk-" + id);				
+				c.checked = (load("BuzzwordBingo." + id) == 'true');
+				var d = document.getElementById(id);
+				d.className =(c.checked)?"highlight":"";				
+			}
+		}
+	}
+	
+	function toggle(id){
+		var elem = document.getElementById(id);
+		if (elem.style.display == "block")
+			elem.style.display = "none";
+		else
+			elem.style.display = "block";
+	}
+	
+	save = function(key,value){};
+	load = function(key){return null};
+	
+	function start() {
+		if(supports_html5_storage()) {
+			save = function(key, value) {
+				localStorage.setItem(key,value);
+			};
+			load = function(key) {
+				return localStorage.getItem(key);
+			};			
+		} else {
+			alert("Your browser does not support localStorage.\nYou won't be able to persist the Bingo grid.\nUpgrading your browser may help.");
+			return;
+		}
+		
+		var grid = load("BuzzwordBingo.grid");
+		if(grid) {
+			console.log("Loaded a previously generated grid");
+			var node = document.getElementById("grid");
+			node.innerHTML = grid;
+			loadGameState();
+		}
+	}
+	</script>
+</head>
+<body onLoad="start()">
+    <div class="container-fluid p-0 m-0">
+        <div class="header-wrapper" style="background-image: url('Images/y.jpeg'); background-blend-mode: lighten; background-color: rgba(255,255,255,0.4);">
+            <div class="row">
+                <div class="col-sm-2">
+                    <a href="#">
+                        <img src="Images/logo2.svg" style="margin: 0px" class="img-responsive" height="200px" /></a>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="d-block text-center" style="font-weight: bold;";>The Collaboration Space</h1>
+                    <nav class="navbar navbar-expand-lg navbar-light">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav m-auto">
+                                <li class="nav-item boxx">
+                                    <a class="nav-link" href="index.html">HOME</a>
+                                </li>
+                                <li class="nav-item boxx">
+                                    <a class="nav-link" href="funActivities.html">BACK</a>
+                                </li>
+                                <li class="nav-item boxx">
+                                    <a class="nav-link" href="meetup.html">MEETUPS</a>
+                                </li>
+                                <li class="nav-item boxx">
+                                    <a class="nav-link" href="funActivities.html">FUN ACTIVITIES</a>
+                                </li>
+                                <li class="nav-item boxx">
+                                    <a class="nav-link" href="#">MENTAL HEALTH</a>
+                                </li>
+                                <li class="nav-item boxx">
+                                    <a class="nav-link" id="btn" href="#">LOGOUT</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+
+        </div>
+        <br>
+        <div class="card" id="rect" style="font-weight: bold; margin:0 auto ;text-align: center; width: 40%; color: white; background-color: #D9A5B3;">
+            <div class="card-body">
+                <h4 style="font-weight: bold;">OFFICE BINGO</h4>
+            </div>
+        </div>
+		<br>
+		<div class="card" id="rect" style="font-weight: normal ; margin:0 auto ;text-align: center; width: 60%; color: white; background-color: #6883BC;">
+            <div class="card-body">
+                <h5 style="font-weight: bold;">Game Instructions: </h5> 
+				Players can select the cards that they relate to by clicking on the checkbox next to the card. Players can then interact with their colleagues and have a fun time discussing everyone's answers.
+            </div>
+        </div>
+        <br>
+<div id="grid" style="margin-left:50px; margin-right: 50px; margin-bottom: 50px;"></div>
+<form>
+    <input type="button" id="but" value="Generate" onClick="generate();"/>
+</form>
+</body>
+</html>
